@@ -11,15 +11,15 @@ import torch.nn as nn
 
 
 
-def unroll(data,unroll_length):
+def unroll(data,length):
     scaler = StandardScaler()
     scaler.fit(data)
     data = scaler.transform(data)
     data = pd.DataFrame(data)
     previous = []
-    for index in range(unroll_length,data.shape[0]) :
+    for index in range(length,data.shape[0]) :
         previou = []
-        previou = list(data.iloc[(index- unroll_length):(index-1),0])
+        previou = list(data.iloc[(index- length):(index-1),0])
         previou.append(data.iloc[index,1])
         previou.append(data.iloc[index,2])
         previou.append(data.iloc[index,3])
@@ -36,14 +36,13 @@ def unroll(data,unroll_length):
 
 
 
-def split(x,data_n,testdatasize,testdatacut,unroll_length) :
-    prediction_time = 1 
-    x_train = np.array(x[0:-testdatacut-prediction_time])
-    y_train = np.array(data_n[unroll_length+prediction_time:-testdatacut])
+def split(x,data_n,testdatasize,cut,length) :
+    x_train = np.array(x[0:-cut-1])
+    y_train = np.array(data_n[length+1:-cut])
 
     # test data
-    x_test = np.array(x[0-testdatacut:-prediction_time])
-    y_test = np.array(data_n[prediction_time-testdatacut:])
+    x_test = np.array(x[0-cut:-1])
+    y_test = np.array(data_n[1-cut:])
     
 
     # see the shape

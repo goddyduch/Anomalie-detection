@@ -22,7 +22,7 @@ from torch import torch
 
 
 
-dataset1 = dataset("Ferrari","/Users/godefroyduchalardhotmail.fr/Downloads/Détection d'anomalie/dataset/realAWSCloudwatch/realAWSCloudwatch/ec2_cpu_utilization_5f5533.csv")
+dataset1 = dataset("Ferrari","data_cpu.csv")
 dataset1.importation()
 dataset1.information()
 dataset1.visualisation()
@@ -66,14 +66,13 @@ testdatasize = 500
 
 testdatacut = testdatasize   + unroll_length  
 
-
-  
 x = unroll(df_test,unroll_length)
 x_train, y_train, x_test, y_test = split(x,value,testdatasize,testdatacut,unroll_length)
 n_in = int(x_train.size(dim=1))
 n_train = int(x_train.size(dim=0))
 n_test = int(y_test.size(dim=0))
 entrainement = False
+
 
 if entrainement : 
     model = LSTM(n_in)

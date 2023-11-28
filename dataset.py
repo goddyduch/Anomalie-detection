@@ -119,7 +119,7 @@ class dataset :
       
         
         #AJOUT VARIABLE INTESSANTE
-        df_modif["daylight"] =  ((df_modif["hour"]>7) & (df_modif["hour"]<19)).astype(int)
+        df_modif["daylight"] =  ((df_modif["hour"]>8) & (df_modif["hour"]<18)).astype(int)
         df_modif['workday'] = (df_modif['weekday'] < 5).astype(int)
         
         
